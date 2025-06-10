@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | TestWebGl</title>
+    <title>Unity WebGL Player | 21</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="https://static.sonartech.io/lib/1.0.0/sonar.js?appId=app_a0953352&isDebug=true"></script>
+	<script src="https://static.sonartech.io/lib/1.0.0/sonar.js?appId=app_a0953352&isDebug=true"></script>
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=720 height=1280 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -21,7 +21,7 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">TestWebGl</div>
+        <div id="unity-build-title">21</div>
       </div>
     </div>
     <script>
@@ -58,14 +58,14 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/AdsGameText.loader.js";
+      var loaderUrl = buildUrl + "/Game.loader.js";
       var config = {
-        dataUrl: buildUrl + "/AdsGameText.data",
-        frameworkUrl: buildUrl + "/AdsGameText.framework.js",
-        codeUrl: buildUrl + "/AdsGameText.wasm",
+        dataUrl: buildUrl + "/Game.data.br",
+        frameworkUrl: buildUrl + "/Game.framework.js.br",
+        codeUrl: buildUrl + "/Game.wasm.br",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
-        productName: "TestWebGl",
+        productName: "21",
         productVersion: "1.0",
         showBanner: unityShowBanner,
       };
@@ -104,8 +104,8 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "720px";
-        canvas.style.height = "1280px";
+        canvas.style.width = "1080px";
+        canvas.style.height = "1920px";
       }
 
       loadingBar.style.display = "block";
