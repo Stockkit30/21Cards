@@ -6,11 +6,11 @@
     <title>Unity WebGL Player | My project (1)</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-	<script src="https://static.sonartech.io/lib/1.0.0/sonar.js?appId=app_a0953352&isDebug=true"></script>
+	<script src="https://sad.adsgram.ai/js/sad.min.js"></script>
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -58,11 +58,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/block.loader.js";
+      var loaderUrl = buildUrl + "/ads.loader.js";
       var config = {
-        dataUrl: buildUrl + "/block.data.gz",
-        frameworkUrl: buildUrl + "/block.framework.js.gz",
-        codeUrl: buildUrl + "/block.wasm.gz",
+        dataUrl: buildUrl + "/ads.data",
+        frameworkUrl: buildUrl + "/ads.framework.js",
+        codeUrl: buildUrl + "/ads.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "My project (1)",
@@ -104,8 +104,8 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+        canvas.style.width = "1080px";
+        canvas.style.height = "1920px";
       }
 
       loadingBar.style.display = "block";
