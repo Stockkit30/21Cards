@@ -6,7 +6,21 @@
     <title>Unity WebGL Player | My project (1)</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 	<script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+	
+	
+	<script>
+	// Ініціалізація Telegram Web App
+	window.Telegram.WebApp.ready();
+  
+	// Передача параметрів в Unity
+	window.unityInstance.SendMessage('GameManager', 'SetTelegramData', JSON.stringify({
+		user: window.Telegram.WebApp.initDataUnsafe.user,
+		platform: 'telegram'
+	}));
+	</script>
+	
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
