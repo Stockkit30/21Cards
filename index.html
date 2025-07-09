@@ -3,181 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | My project (1)</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
+    <title>Unity WebGL Player | Tip</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
   </head>
-  <body>
-    <!-- Debug info (тимчасово для тестування) -->
-    <div id="debug-info" style="position: fixed; top: 0; left: 0; background: black; color: white; padding: 10px; font-size: 12px; z-index: 9999; max-width: 300px;">
-        <div>Loading debug info...</div>
-    </div>
-
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
-        </div>
-      </div>
-      <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">My project (1)</div>
-      </div>
-    </div>
-
+  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
+    <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1" style="width: 1080px; height: 1920px; background: #231F20"></canvas>
+    <script src="Build/TestGame.loader.js"></script>
     <script>
-      // === TELEGRAM INITIALIZATION ===
-      console.log("=== TELEGRAM DEBUG INFO ===");
-      console.log("window.Telegram exists:", !!window.Telegram);
-      console.log("Telegram.WebApp exists:", !!window.Telegram?.WebApp);
-      console.log("initData:", window.Telegram?.WebApp?.initData);
-      console.log("initDataUnsafe:", window.Telegram?.WebApp?.initDataUnsafe);
-      console.log("User Agent:", navigator.userAgent);
-      console.log("=== END DEBUG ===");
-
-      // Debug info updater
-      function updateDebugInfo() {
-        const debugDiv = document.getElementById('debug-info');
-        if (!debugDiv) return;
-        
-        const info = [
-          `URL: ${window.location.href.substring(0, 40)}...`,
-          `Telegram exists: ${!!window.Telegram}`,
-          `WebApp exists: ${!!window.Telegram?.WebApp}`,
-          `InitData: ${window.Telegram?.WebApp?.initData ? 'YES' : 'NO'}`,
-          `Platform: ${window.Telegram?.WebApp?.platform || 'unknown'}`,
-          `Version: ${window.Telegram?.WebApp?.version || 'unknown'}`,
-          `Unity loaded: ${!!window.unityInstance}`
-        ];
-        
-        debugDiv.innerHTML = info.join('<br>');
-      }
-
-      // Update debug info every second
-      setInterval(updateDebugInfo, 1000);
-      
-      // Hide debug after 15 seconds
-      setTimeout(() => {
-        const debugDiv = document.getElementById('debug-info');
-        if (debugDiv) debugDiv.style.display = 'none';
-      }, 15000);
-
-      // Initialize Telegram Web App
-      let telegramData = null;
-      if (window.Telegram && window.Telegram.WebApp) {
-        window.Telegram.WebApp.ready();
-        window.Telegram.WebApp.expand();
-        
-        // Prepare Telegram data for Unity
-        telegramData = {
-          user: window.Telegram.WebApp.initDataUnsafe?.user || null,
-          platform: 'telegram',
-          initData: window.Telegram.WebApp.initData || '',
-          version: window.Telegram.WebApp.version || ''
-        };
-        
-        console.log("Telegram Web App initialized successfully");
-        console.log("Telegram data prepared:", telegramData);
-      } else {
-        console.error("Telegram Web App not available!");
-        telegramData = {
-          user: null,
-          platform: 'web',
-          initData: '',
-          version: ''
-        };
-      }
-
-      // === UNITY INITIALIZATION ===
-      var container = document.querySelector("#unity-container");
-      var canvas = document.querySelector("#unity-canvas");
-      var loadingBar = document.querySelector("#unity-loading-bar");
-      var progressBarFull = document.querySelector("#unity-progress-bar-full");
-      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
-      var warningBanner = document.querySelector("#unity-warning");
-
-      function unityShowBanner(msg, type) {
-        function updateBannerVisibility() {
-          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
-        }
-        var div = document.createElement('div');
-        div.innerHTML = msg;
-        warningBanner.appendChild(div);
-        if (type == 'error') div.style = 'background: red; padding: 10px;';
-        else {
-          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
-          setTimeout(function() {
-            warningBanner.removeChild(div);
-            updateBannerVisibility();
-          }, 5000);
-        }
-        updateBannerVisibility();
-      }
-
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/adstest15.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/adstest15.data",
-        frameworkUrl: buildUrl + "/adstest15.framework.js",
-        codeUrl: buildUrl + "/adstest15.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "My project (1)",
-        productVersion: "1.0",
-        showBanner: unityShowBanner,
-      };
-
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
         var meta = document.createElement('meta');
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
-        container.className = "unity-mobile";
-        canvas.className = "unity-mobile";
-      } else {
-        canvas.style.width = "1080px";
-        canvas.style.height = "1920px";
+
+        var canvas = document.querySelector("#unity-canvas");
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.position = "fixed";
+
+        document.body.style.textAlign = "left";
       }
 
-      loadingBar.style.display = "block";
-
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
-          loadingBar.style.display = "none";
-          
-          // Store Unity instance globally
-          window.unityInstance = unityInstance;
-          
-          // Send Telegram data to Unity AFTER Unity is loaded
-          setTimeout(() => {
-            try {
-              console.log("Sending Telegram data to Unity:", telegramData);
-              unityInstance.SendMessage('GameManager', 'SetTelegramData', JSON.stringify(telegramData));
-              console.log("Telegram data sent successfully");
-            } catch (error) {
-              console.error("Error sending data to Unity:", error);
-            }
-          }, 1000); // Wait 1 second for Unity to fully initialize
-          
-          fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
-          };
-        }).catch((message) => {
-          alert(message);
-        });
-      };
-
-      document.body.appendChild(script);
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/TestGame.data",
+        frameworkUrl: "Build/TestGame.framework.js",
+        codeUrl: "Build/TestGame.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Tip",
+        productVersion: "1.0",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
     </script>
   </body>
 </html>
