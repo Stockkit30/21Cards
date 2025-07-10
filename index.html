@@ -5,11 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Tip</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+    <script src="https://static.sonartech.io/lib/1.0.0/sonar.js?appId=app_58501d38"></script>
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1" style="width: 1080px; height: 1920px; background: #231F20"></canvas>
-    <script src="Build/2.loader.js"></script>
+    <script src="Build/TestAdSonar.loader.js"></script>
     <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
@@ -27,9 +27,9 @@
       }
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/2.data",
-        frameworkUrl: "Build/2.framework.js",
-        codeUrl: "Build/2.wasm",
+        dataUrl: "Build/TestAdSonar.data",
+        frameworkUrl: "Build/TestAdSonar.framework.js",
+        codeUrl: "Build/TestAdSonar.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Tip",
